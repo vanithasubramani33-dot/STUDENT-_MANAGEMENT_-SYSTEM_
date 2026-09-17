@@ -1,0 +1,163 @@
+
+```javascript
+const API_URL = "http://127.0.0.1:8000/api/students/";
+
+
+// =======================
+// GET - READ ALL STUDENTS
+// =======================
+
+async function getStudents() {
+
+    try {
+
+        const response = await fetch(API_URL);
+
+        const data = await response.json();
+
+        console.log(data);
+
+        displayStudents(data);
+
+    } catch (error) {
+
+        console.log("Error:", error);
+
+    }
+}
+
+
+// =======================
+// GET - READ ONE STUDENT
+// =======================
+
+async function getStudent(id) {
+
+    try {
+
+        const response =
+            await fetch(API_URL + id + "/");
+
+        const data = await response.json();
+
+        console.log(data);
+
+    } catch (error) {
+
+        console.log("Error:", error);
+
+    }
+}
+
+
+// =======================
+// POST - ADD STUDENT
+// =======================
+
+async function addStudent(student) {
+
+    try {
+
+        const response = await fetch(API_URL, {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify(student)
+
+        });
+
+
+        const data = await response.json();
+
+        console.log(data);
+
+        alert("Student added successfully!");
+
+        getStudents();
+
+    } catch (error) {
+
+        console.log("Error:", error);
+
+    }
+}
+
+
+// =======================
+// PUT - UPDATE STUDENT
+// =======================
+
+async function updateStudent(id, student) {
+
+    try {
+
+        const response = await fetch(
+            API_URL + id + "/",
+            {
+                method: "PUT",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify(student)
+            }
+        );
+
+
+        const data = await response.json();
+
+        console.log(data);
+
+        alert("Student updated successfully!");
+
+        getStudents();
+
+    } catch (error) {
+
+        console.log("Error:", error);
+
+    }
+}
+
+
+// =======================
+// DELETE - DELETE STUDENT
+// =======================
+
+async function deleteStudent(id) {
+
+    if (!confirm("Delete this student?")) {
+        return;
+    }
+
+
+    try {
+
+        const response = await fetch(
+            API_URL + id + "/",
+            {
+                method: "DELETE"
+            }
+        );
+
+
+        if (response.ok) {
+
+            alert("Student deleted successfully!");
+
+            getStudents();
+
+        }
+
+    } catch (error) {
+
+        console.log("Error:", error);
+
+    }
+}
+```
