@@ -1,0 +1,77 @@
+-- STUDENT MANAGEMENT SYSTEM DATABASE
+
+-- 1. Create Table
+CREATE TABLE students (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    roll_no TEXT NOT NULL UNIQUE,
+    email TEXT NOT NULL,
+    gender TEXT NOT NULL,
+    department TEXT NOT NULL,
+    year TEXT NOT NULL,
+    attendance REAL NOT NULL
+);
+
+
+-- 2. Insert Student Data
+INSERT INTO students
+(name, roll_no, email, gender, department, year, attendance)
+VALUES
+('Vani', '101', 'vani@gmail.com', 'Female', 'CSE', '3rd Year', 90);
+
+INSERT INTO students
+(name, roll_no, email, gender, department, year, attendance)
+VALUES
+('Priya', '102', 'priya@gmail.com', 'Female', 'ECE', '3rd Year', 85);
+
+INSERT INTO students
+(name, roll_no, email, gender, department, year, attendance)
+VALUES
+('Arun', '103', 'arun@gmail.com', 'Male', 'IT', '2nd Year', 88);
+
+INSERT INTO students
+(name, roll_no, email, gender, department, year, attendance)
+VALUES
+('Karthik', '104', 'karthik@gmail.com', 'Male', 'EEE', '2nd Year', 92);
+
+
+-- 3. Display All Students
+SELECT * FROM students;
+
+
+-- 4. Search Student
+SELECT * FROM students
+WHERE name LIKE '%Vani%';
+
+
+-- 5. Update Student
+UPDATE students
+SET attendance = 95
+WHERE roll_no = '101';
+
+
+-- 6. Delete Student
+DELETE FROM students
+WHERE roll_no = '104';
+
+
+-- 7. Count Total Students
+SELECT COUNT(*) AS total_students
+FROM students;
+
+
+-- 8. Count Students by Gender
+SELECT gender, COUNT(*) AS total_students
+FROM students
+GROUP BY gender;
+
+
+-- 9. Count Students by Department
+SELECT department, COUNT(*) AS total_students
+FROM students
+GROUP BY department;
+
+
+-- 10. Calculate Average Attendance
+SELECT AVG(attendance) AS average_attendance
+FROM students;
